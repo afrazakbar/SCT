@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ text.dashboard }}{% endblock %}
+
+{% block content %}
+<h2 style="font-size: 2rem; margin-bottom: 20px;">{{ text.welcome_back }}, {{ user.email }}!</h2>
+
+<h3 style="width: 100%; max-width: 900px; text-align: left; margin-bottom: 15px; font-weight: 500;">{{ text.soil_vitals }}</h3>
+<div class="vitals-container" style="max-width: 900px;">
+    <!-- pH Vitals Card -->
+    <div class="card vital-card" id="ph-vital">
+        <h4>{{ text.ph_level }}</h4>
+        <div class="progress-bar" style="--percent: 46.4%;">
+            <span class="progress-value">6.9</span>
+        </div>
+        <p>{{ text.ph_status_ideal }}</p>
+    </div>
+
+    <!-- Moisture Vitals Card -->
+    <div class="card vital-card" id="moisture-vital">
+        <h4>{{ text.moisture_content }}</h4>
+        <div class="progress-bar" style="--percent: 62.1%;">
+            <span class="progress-value">62%</span>
+        </div>
+        <p>{{ text.moisture_status_good }}</p>
+    </div>
+</div>
+
+<h3 style="width: 100%; max-width: 900px; text-align: left; margin-top: 30px; margin-bottom: 15px; font-weight: 500;">
+    {{ text.weather_forecast }} {{ weather.location if weather.success else text.weather_region_placeholder }}
+</h3>
+<div class="weather-forecast" style="max-width: 900px;">
+    {% if weather.success %}
+        {% for day in weather.forecast %}
+        <div class="card weather-day">
+            <strong>{{ day.date }}</strong>
+            <img src="https:{{ day.condition_icon }}" onerror="this.onerror=null;this.src='https://placehold.co/50x50/ccc/fff?text=N/A';" alt="{{ day.condition_text }}">
+            <p>{{ day.condition_text }}</p>
+            <p class="temp-range">{{ day.max_temp_c }}°C / {{ day.min_temp_c }}°C</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="card" style="grid-column: 1 / -1;">
+            <p>{{ text.error_weather }} {{ weather.message }}</p>
+        </div>
+    {% endif %}
+</div>
+
+<h3 style="width: 100%; max-width: 900px; text-align: left; margin-top: 30px; margin-bottom: 15px; font-weight: 500;">{{ text.farm_profile }}</h3>
+<div class="card" style="max-width: 900px;">
+    <p><strong>{{ text.total_land }}:</strong> {{ user.acres }} acres</p>
+    <p><strong>{{ text.plant_types }}:</strong> {{ user.plants | join(', ') }}</p>
+</div>
+
+{% endblock %}

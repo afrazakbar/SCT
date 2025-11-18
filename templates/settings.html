@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>General Settings</h2>
+    
+    <form id="settings-form">
+        <!-- Language Selector -->
+        <label for="setting-lang-select" style="display: block; margin-top: 15px;">Language:</label>
+        <select id="setting-lang-select" name="language">
+            {% for code, name in languages.items() %}
+                <option value="{{ code }}" {% if settings.lang == code %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+        
+        <!-- Theme Selector (Alternative to Toggle for persistent setting) -->
+        <label for="setting-theme-select" style="display: block; margin-top: 15px;">Theme:</label>
+        <select id="setting-theme-select" name="theme">
+            <option value="light" {% if settings.theme == 'light' %}selected{% endif %}>Light</option>
+            <option value="dark" {% if settings.theme == 'dark' %}selected{% endif %}>Dark</option>
+        </select>
+
+        <button type="submit" class="primary" style="margin-top: 25px;">Save Preferences</button>
+    </form>
+</div>
+
+<div class="card" style="margin-top: 20px;">
+    <h2>Account Management</h2>
+    
+    <!-- Reset Setup Button -->
+    <button id="reset-setup-btn" class="secondary" style="margin-top: 10px; color: #DC2626; border-color: #DC2626;">
+        Reset Setup Wizard
+    </button>
+    
+    <!-- Sign Out Button -->
+    <a href="{{ url_for('signout') }}" style="text-decoration: none;">
+        <button type="button" class="primary" style="margin-top: 15px; background-color: #EF4444;">
+            Sign Out
+        </button>
+    </a>
+</div>
+{% endblock %}

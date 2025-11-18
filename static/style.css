@@ -1,0 +1,292 @@
+/* Google Font: Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+    --color-primary: #10B981; /* Emerald 500 */
+    --color-primary-dark: #059669; /* Emerald 600 */
+    --color-text-light: #1F2937; /* Gray 800 */
+    --color-text-dark: #F9FAFB; /* Gray 50 */
+    --color-bg-light: #FFFFFF; /* White */
+    --color-bg-dark: #1F2937; /* Gray 800 */
+    --color-card-light: #F3F4F6; /* Gray 100 */
+    --color-card-dark: #374151; /* Gray 700 */
+    --color-border: #D1D5DB; /* Gray 300 */
+    --color-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+}
+
+/* Light Theme (Default) */
+body.light {
+    background-color: var(--color-bg-light);
+    color: var(--color-text-light);
+}
+body.light .card {
+    background-color: var(--color-card-light);
+    box-shadow: var(--color-shadow);
+}
+body.light .progress-bar-fill {
+    background-color: var(--color-primary);
+}
+body.light input, body.light select, body.light button.secondary {
+    border: 1px solid var(--color-border);
+    background-color: white;
+    color: var(--color-text-light);
+}
+
+/* Dark Theme */
+body.dark {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-dark);
+}
+body.dark .card {
+    background-color: var(--color-card-dark);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+body.dark .progress-bar-fill {
+    background-color: var(--color-primary-dark);
+}
+body.dark input, body.dark select, body.dark button.secondary {
+    border: 1px solid var(--color-card-dark);
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-dark);
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed), transform 0.2s;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* Header/Navigation */
+header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header h1 a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: inherit;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+nav a:hover {
+    background-color: var(--color-card-light);
+}
+body.dark nav a:hover {
+    background-color: var(--color-card-dark);
+}
+
+/* Cards and UI elements */
+.card {
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 450px;
+}
+
+input, select, button {
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 8px;
+}
+
+/* Buttons */
+button {
+    cursor: pointer;
+    font-weight: 600;
+}
+button.primary {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+}
+button.secondary {
+    background-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--color-border);
+}
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Setup Wizard Specific Styles */
+.setup-wizard {
+    overflow: hidden;
+    position: relative;
+    max-width: 450px;
+    width: 100%;
+}
+.setup-step {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-speed), transform var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.setup-step.active {
+    opacity: 1;
+    pointer-events: all;
+    position: relative; /* Only the active step is relative/in flow */
+    transform: translateX(0);
+}
+/* Transitions for steps */
+.setup-step.entering {
+    transform: translateX(100%);
+}
+.setup-step.leaving {
+    transform: translateX(-100%);
+}
+
+.setup-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.setup-actions button {
+    width: 100%;
+}
+
+/* Vitals - Progress Bars */
+.vitals-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+.vital-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.progress-bar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    position: relative;
+    background: conic-gradient(var(--color-primary) 0%, var(--color-card-light) 0%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+body.dark .progress-bar {
+    background: conic-gradient(var(--color-primary-dark) 0%, var(--color-bg-dark) 0%);
+}
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background: var(--color-bg-light);
+    border-radius: 50%;
+}
+body.dark .progress-bar::before {
+    background: var(--color-bg-dark);
+}
+.progress-value {
+    z-index: 1;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Weather Forecast */
+.weather-forecast {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+.weather-day {
+    padding: 20px;
+    text-align: center;
+}
+.weather-day img {
+    width: 50px;
+    height: 50px;
+    margin: 10px 0;
+}
+.temp-range {
+    font-weight: 600;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    border: none;
+    background: none;
+    color: inherit;
+    padding: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    nav {
+        margin-top: 10px;
+    }
+    nav a {
+        margin: 0 5px;
+    }
+    .main-content {
+        padding: 20px 10px;
+    }
+    .vitals-container {
+        grid-template-columns: 1fr;
+    }
+    .weather-forecast {
+        grid-template-columns: 1fr;
+    }
+    .card {
+        max-width: 100%;
+    }
+}

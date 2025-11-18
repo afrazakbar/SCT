@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ text.support }}{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align: center;">
+    <h2>{{ text.support_title }}</h2>
+    <p style="margin-bottom: 30px;">{{ text.support_intro }}</p>
+
+    <div style="margin: 20px 0;">
+        <h3 style="color: var(--color-primary);">{{ text.email_support }}</h3>
+        <p style="font-size: 1.2rem; font-weight: 600; margin-top: 5px;">blankemail@sct.com</p>
+    </div>
+
+    <div style="margin: 20px 0;">
+        <h3 style="color: var(--color-primary);">{{ text.phone_support }}</h3>
+        <p style="font-size: 1.2rem; font-weight: 600; margin-top: 5px;">+91 9074000762</p>
+    </div>
+
+    <p style="margin-top: 30px; font-style: italic;">{{ text.support_response_time }}</p>
+</div>
+{% endblock %}

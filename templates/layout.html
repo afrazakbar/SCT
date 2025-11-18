@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ settings.lang or 'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ text.app_name }} | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="{{ settings.theme or 'light' }}" data-initial-theme="{{ settings.theme or 'light' }}">
+    {% if request.path != '/setup' %}
+    <header>
+        <h1><a href="{{ url_for('dashboard') }}">{{ text.app_name }}</a></h1>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">{{ text.dashboard }}</a>
+            <a href="{{ url_for('support') }}">{{ text.support }}</a>
+            <a href="{{ url_for('settings') }}">{{ text.settings }}</a>
+            <button class="theme-toggle" aria-label="Theme Toggle">
+                &#9729; <!-- Default to Sun/Moon icon, updated by JS -->
+            </button>
+        </nav>
+    </header>
+    {% endif %}
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% if request.path != '/setup' %}
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    {% endif %}
+    {% if request.path == '/setup' %}
+    <!-- Setup script only needed for setup page -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    {% endif %}
+</body>
+</html>
